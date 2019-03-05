@@ -1,26 +1,26 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component, Fragment } from 'react';
+import DefaultComponent from './components/DefaultComponent'
+import UserList from './components/UserList'
+import { Router, Switch, Route, Redirect } from 'react-router-dom'
+import history from './utils/history'
+import './App.css'
 
+
+  const UnauthenticatedComponent = (
+    <Fragment>
+            <Switch>
+                <Route path="/signup" component={UserList} />
+                <Route path="/" component={DefaultComponent} />
+                <Route path="/reset-password" component={DefaultComponent} />
+                <Redirect to="/" />
+            </Switch>
+    </Fragment>
+)
 class App extends Component {
   render() {
+    const routers = UnauthenticatedComponent
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Router history={history}>{routers}</Router>
     );
   }
 }

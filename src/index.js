@@ -1,26 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux'
+
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {configureStore} from './store'
 import * as actions from './actions'
-const tracks = [
-    {
-      id: 1,
-      title: 'Em của ngày hôm qua'
-    },
-    {
-      id: 2,
-      title: 'Cơn mưa ngang qua'
-    }
-  ];
+const users = [{username:'xhuiklm10',email:'thdang1003@gmail.com',name:'Tran Hai Dang'},
+{username:'xhuiklm10',email:'thdang1003@gmail.com',name:'Tran Hai Dang'}]
 
 const store = configureStore()
-store.dispatch(actions.setUsers(tracks))
+store.dispatch(actions.setUsers(users))
 
-
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Provider store={store}>
+<App />
+</Provider>, 
+document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

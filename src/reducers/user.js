@@ -1,14 +1,18 @@
 import { USER_ADD, USER_LIST, USER_ADD_FAIL, USER_ADD_SUCCESS, USER_DEL, USER_MOD_SUCCESS
-, USER_MOD_FAIL } from "../constants/user";
+, USER_MOD_FAIL, 
+USER_LIST_SUCCESS} from "../constants/user";
 
 const initialState = {
     notification : null,
-    error: null
+    error: null,
+    users : []
 }
 const UserReducer = (state = initialState, action) => {
     switch (action.type) {
+        case USER_LIST_SUCCESS:
+            return setUsers(state, action.data)
         case USER_LIST:
-            return setUsers(state, action)
+            return setUsers(state, action.data)
         case USER_ADD:
             return {
                 ...state,
@@ -29,10 +33,11 @@ const UserReducer = (state = initialState, action) => {
             return {
                 ...state
             }
+        default:
+            return { ...state}
     }
 }
-function setUsers(state, action){
-    const {users} = action;
-    return [...state, ...users]
+function setUsers(state, data){
+    return {...state, users:data }
 }
 export default UserReducer
