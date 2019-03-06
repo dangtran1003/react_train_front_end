@@ -10,9 +10,9 @@ const initialState = {
 const UserReducer = (state = initialState, action) => {
     switch (action.type) {
         case USER_LIST_SUCCESS:
-            return setUsers(state, action.data)
+            return setUsers(state, action.payload)
         case USER_LIST:
-            return setUsers(state, action.data)
+            return setUsers(state, action.payload)
         case USER_ADD:
             return {
                 ...state,

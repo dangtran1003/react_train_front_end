@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 import PropTypes from 'prop-types'
 
-export default class User extends Component {
+class User extends Component {
   static propTypes = {
     username : PropTypes.string,
     name : PropTypes.string,
@@ -20,9 +20,11 @@ export default class User extends Component {
         <td>{name}</td>
         <td>{email}</td>
         <td>
-            <span class="badge badge-success">Active</span>
+            <span className="badge badge-success">Active</span>
         </td>
       </tr>
     )
   }
 }
+
+export default User

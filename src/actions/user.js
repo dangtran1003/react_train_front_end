@@ -1,5 +1,5 @@
 import {USER_ADD, USER_API, USER_DEL, USER_LIST, USER_MOD,
-BASE_URL, USER_ADD_SUCCESS, USER_ADD_FAIL, USER_LIST_SUCCESS } from '../constants/user'
+BASE_URL,USER_LIST_FAIL, USER_ADD_SUCCESS, USER_ADD_FAIL, USER_LIST_SUCCESS } from '../constants/user'
 import axios from 'axios'
 
 const user_add = (username, email, name) => dispatch => {
@@ -44,3 +44,36 @@ export function setUsers(data){
         payload : data
     }
 }
+
+export function getUsers(){
+    return {
+        type: USER_LIST
+    }
+}
+
+export function getUsersFailure()
+{
+    return {
+        type: USER_LIST_FAIL
+    }
+}
+
+export function fetchData(key, first, last){
+    return (dispatch) => {
+        dispatch(getUsers())
+        axios.post(USER_API.USER_LIST, {key, first, last})
+    .then(({status, data: {data, error}}) =>
+    {
+        switch (Number(error.code))
+        {
+            case 0:
+                dispatch(setUsers(data))
+                break
+            default:
+                break
+        }
+    })
+
+    }
+}
+

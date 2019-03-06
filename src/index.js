@@ -7,8 +7,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {configureStore} from './store'
 import * as actions from './actions'
-const users = [{username:'xhuiklm10',email:'thdang1003@gmail.com',name:'Tran Hai Dang'},
-{username:'xhuiklm10',email:'thdang1003@gmail.com',name:'Tran Hai Dang'}]
+const users = [{username:'xhuiklm10',email:'thdang1003@gmail.com',name:'Tran Hai Dang'}]
 
 const store = configureStore()
 store.dispatch(actions.setUsers(users))
