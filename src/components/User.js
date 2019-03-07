@@ -19,8 +19,9 @@ class User extends Component {
         <td>{username}</td>
         <td>{name}</td>
         <td>{email}</td>
-        <td>
-            <span className="badge badge-success">Active</span>
+        <td style={{width: 100}}>
+          <a href="#" className="btn btn-info" role="button" style={{margin:4}}><i className="icons font-l d-block mt-0 cui-wrench"></i></a>
+          <a href="#" className="btn btn-danger" role="button"><i className="icons font-l d-block mt-0 cui-trash"></i></a>
         </td>
       </tr>
     )

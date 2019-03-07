@@ -1,17 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
-
+import {configureStore} from './store'
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {configureStore} from './store'
-import * as actions from './actions'
+// import store from './store'
+// import * as actions from './actions'
 const users = [{username:'xhuiklm10',email:'thdang1003@gmail.com',name:'Tran Hai Dang'}]
 
 const store = configureStore()
-store.dispatch(actions.setUsers(users))
-
 ReactDOM.render(<Provider store={store}>
 <App />
 </Provider>, 

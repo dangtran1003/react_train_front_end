@@ -1,22 +1,61 @@
 import React, {Component} from 'react'
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 import PropTypes from 'prop-types'
 import '../App.css'
 import User from './User'
-import {user_list, setUsers} from '../actions/user'
+import {user_list, user_add} from '../actions/user'
+import { connect } from 'react-redux';
 
 
 class UserList extends Component{
+    state = {
+      username : '',
+      email : '',
+      name : '',
+      error: ''
+    }
+    
+    handleSubmit = e => {
+      e.preventDefault()
+      if (this.state.username.length != 0 && this.state.email.length != 0)
+        this.props.dispatch(user_add(this.state.username, this.state.email, this.state.name))
+      else 
+        {
+          this.setState({error:'Thiếu username hoặc password!'})
+          alert('Thiếu username hoặc password!')
+        }
+    }
+
+    handleFormChange = e =>{
+      const name = e.target.name
+      const value = e.target.value
+      this.setState({
+        [name] :value
+      })
+    }
     static propTypes = {
-        users : PropTypes.array
+        users : PropTypes.array,
+        total_users: PropTypes.array
     }
 
     static defaultProps = {
-      users : [{username:'xhuiklm10',email:'thdang1003@gmail.com',name:'Tran Hai Dang'},
-      {username:'xhuiklm10',email:'thdang1003@gmail.com',name:'Tran Hai Dang'}]
+      users : [],
+      total_users: [1]
     }
+
+    componentDidMount() {
+      this.props.dispatch(user_list(null,0,10))
+    }
+
+    componentWillReceiveProps(nextProps) {
+      console.log('DEBUG')
+      console.log(nextProps.users)
+    }
+
     render(){
-      console.log(this.props)      
+      console.log('bbbb',this.props)
+      const {users} = this.props
+      console.log(users) 
         return (
           <div className="card">
           <div className="card-header">
@@ -34,7 +73,6 @@ class UserList extends Component{
               <tbody>
                 {
                    this.props.users.map((user, key) => {
-                  //  users.map((user, key) => {
                     const {username, email, name} = user
                     return (
                       <User username={username} email={email} name = {name} key={key}></User>
@@ -42,11 +80,12 @@ class UserList extends Component{
                   })
                 }
                 <tr>
-                  <td>Vishnu Serghei</td>
-                  <td>2012/01/01</td>
-                  <td>Member</td>
+                  <td><input className="form-control" name="username" type="text" placeholder="Enter your username" onChange={this.handleFormChange}></input></td>
+                  <td><input className="form-control" name="name" type="text" placeholder="Enter your name" onChange={this.handleFormChange}></input></td>
+                  <td><input className="form-control" name="email" type="text" placeholder="Enter your email" onChange={this.handleFormChange}></input></td>
                   <td>
-                    <span className="badge badge-success">Active</span>
+                      <button href="#" className="btn btn-success" role="button" style={{margin:4}} onClick={this.handleSubmit}><i className="icons font-l d-block mt-0 cui-check" ></i></button>
+                      <button href="#" className="btn btn-danger" role="button"><i className="icons font-l d-block mt-0 cui-trash"></i></button>
                   </td>
                 </tr>
               </tbody>
@@ -59,6 +98,17 @@ class UserList extends Component{
                 <li className="page-item active">
                   <a className="page-link" href="#">1</a>
                 </li>
+                {this.props.pages.map((page,key)=>{
+                  return (
+                    <li className="page-item" key = {key} >
+                  <a className="page-link" href="#" >{page}</a>
+                </li>
+                  )
+                })}
+
+                {/* <li className="page-item active">
+                  <a className="page-link" href="#">1</a>
+                </li>
                 <li className="page-item">
                   <a className="page-link" href="#">2</a>
                 </li>
@@ -67,7 +117,7 @@ class UserList extends Component{
                 </li>
                 <li className="page-item">
                   <a className="page-link" href="#">4</a>
-                </li>
+                </li> */}
                 <li className="page-item">
                   <a className="page-link" href="#">Next</a>
                 </li>
@@ -79,4 +129,9 @@ class UserList extends Component{
     }
 }
 
-export default UserList
+const mapStateToProps = (state) => ({
+  users: state.data.users,
+  pages: state.data.pages
+})
+
+export default connect(mapStateToProps, null)(UserList)

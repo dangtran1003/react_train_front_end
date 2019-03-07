@@ -1,78 +1,84 @@
-import {USER_ADD, USER_API, USER_DEL, USER_LIST, USER_MOD,
-BASE_URL,USER_LIST_FAIL, USER_ADD_SUCCESS, USER_ADD_FAIL, USER_LIST_SUCCESS } from '../constants/user'
+import {
+    USER_ADD, USER_API, USER_DEL, USER_LIST, USER_MOD,
+    BASE_URL, USER_LIST_FAIL, USER_ADD_SUCCESS, USER_ADD_FAIL, USER_LIST_SUCCESS
+} from '../constants/user'
 import axios from 'axios'
 
 const user_add = (username, email, name) => dispatch => {
-    dispatch({type:USER_ADD})
-    axios.post(USER_API.USER_ADD, {username, email, name})
-    .then(({status, data: {data, error}}) => {
-        switch (Number(error.code))
-        {
-            case 0:
-                dispatch({type: USER_ADD_SUCCESS, data: "Thêm user thành công!"})
-                break
-            default:
-                break
-        }
-    })
-    .catch(error => {
-        console.log(error)
-    })
+    dispatch({ type: USER_ADD })
+    axios.post(BASE_URL+USER_API.USER_ADD, { username, email, name })
+        .then(({ status, data: { data, error} }) => {
+            switch (Number(error.code)) {
+                case 0:
+                    const data = {username, email, name}
+                    dispatch(addUser(data))
+                    break
+                default:
+                    break
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
 }
 
-const user_list = (key, first, last) => dispatch =>{
-    dispatch({type:USER_LIST})
-    axios.post(USER_API.USER_LIST, {key, first, last})
-    .then(({status, data: {data, error}}) =>
-    {
-        switch (Number(error.code))
-        {
-            case 0:
-                dispatch({type:USER_LIST_SUCCESS, payload: data})
-                break
-            default:
-                break
-        }
-    })
+const user_list = (key=null, offset=0, limit=10) => dispatch => {
+    dispatch({ type: USER_LIST })
+    axios.post(BASE_URL+USER_API.USER_LIST, { key, offset, limit })
+        .then(({ status, data: { data, error, total_users } }) => {
+            switch (Number(error.code)) {
+                case 0:
+                    console.log(total_users)
+                    dispatch(setUsers(data, total_users))
+                    break
+                default:
+                    break
+            }
+        })
 }
 export {
-    user_add,user_list
+    user_add, user_list, test
 }
-export function setUsers(data){
+export function setUsers(data, total_users) {
     return {
         type: USER_LIST_SUCCESS,
-        payload : data
+        payload: data,
+        total_users: total_users
     }
 }
 
-export function getUsers(){
+export function addUser(data) {
+    console.log(data)
+    return {
+        type : USER_ADD_SUCCESS,
+        payload : data
+    }
+}
+export function getUsers() {
     return {
         type: USER_LIST
     }
 }
 
-export function getUsersFailure()
-{
+export function getUsersFailure() {
     return {
         type: USER_LIST_FAIL
     }
 }
 
-export function fetchData(key, first, last){
+export function fetchData(key, first, last) {
     return (dispatch) => {
         dispatch(getUsers())
-        axios.post(USER_API.USER_LIST, {key, first, last})
-    .then(({status, data: {data, error}}) =>
-    {
-        switch (Number(error.code))
-        {
-            case 0:
-                dispatch(setUsers(data))
-                break
-            default:
-                break
-        }
-    })
+        axios.post(USER_API.USER_LIST, { key, first, last })
+            .then(({ status, data: { data, error } }) => {
+                switch (Number(error.code)) {
+                    case 0:
+                        dispatch(setUsers(data))
+                        break
+                    default:
+                        break
+                }
+            })
 
     }
 }
