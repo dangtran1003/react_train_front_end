@@ -14,7 +14,7 @@ class UserList extends Component{
       name : '',
       error: ''
     }
-    
+
     handleSubmit = e => {
       e.preventDefault()
       if (this.state.username.length != 0 && this.state.email.length != 0)
@@ -44,7 +44,7 @@ class UserList extends Component{
     }
 
     componentDidMount() {
-      this.props.dispatch(user_list(null,0,10))
+      this.props.dispatch(user_list(null,this.props.match.params.page-1,10))
     }
 
     componentWillReceiveProps(nextProps) {
@@ -57,9 +57,12 @@ class UserList extends Component{
       const {users} = this.props
       console.log(users) 
         return (
+          
           <div className="card">
           <div className="card-header">
-            <i></i> Danh sách người dùng</div>
+            <i> Danh sách người dùng</i>
+            </div>
+            {this.props.error && alert(this.props.error)}
           <div className="card-body">
             <table className="table table-responsive-sm table-bordered table-striped table-sm">
               <thead>
@@ -73,9 +76,9 @@ class UserList extends Component{
               <tbody>
                 {
                    this.props.users.map((user, key) => {
-                    const {username, email, name} = user
+                    const {id, username, email, name} = user
                     return (
-                      <User username={username} email={email} name = {name} key={key}></User>
+                      <User username={username} email={email} name = {name} key={key} id={id}></User>
                     )
                   })
                 }
@@ -95,13 +98,13 @@ class UserList extends Component{
                 <li className="page-item">
                   <a className="page-link" href="#">Prev</a>
                 </li>
-                <li className="page-item active">
-                  <a className="page-link" href="#">1</a>
+                <li className={"page-time" +(this.props.match.params.page == 1 ? " active" : "") }>
+                  <a className="page-link" href="list/1">1</a>
                 </li>
                 {this.props.pages.map((page,key)=>{
                   return (
-                    <li className="page-item" key = {key} >
-                  <a className="page-link" href="#" >{page}</a>
+                    <li className={"page-time" +(this.props.match.params.page == page ? " active" : "") } key = {key}>
+                  <a className="page-link" href={'list/' + page.toString()}>{page}</a>
                 </li>
                   )
                 })}
@@ -131,7 +134,8 @@ class UserList extends Component{
 
 const mapStateToProps = (state) => ({
   users: state.data.users,
-  pages: state.data.pages
+  pages: state.data.pages,
+  error: state.data.error
 })
 
 export default connect(mapStateToProps, null)(UserList)

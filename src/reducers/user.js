@@ -1,13 +1,17 @@
 import { USER_ADD, USER_LIST, USER_ADD_FAIL, USER_ADD_SUCCESS, USER_DEL, USER_MOD_SUCCESS
-, USER_MOD_FAIL, 
-USER_LIST_SUCCESS} from "../constants/user";
+, USER_MOD_FAIL, USER_DEL_SUCCESS,
+USER_LIST_SUCCESS,
+USER_DETAIL,
+USER_DETAIL_SUCCESS} from "../constants/user";
+import { stat } from "fs";
 
 const initialState = {
     notification : null,
     error: null,
     users : [],
     pages : [],
-    total_users: 0
+    total_users: 0,
+    user : null
 }
 const UserReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -21,7 +25,8 @@ const UserReducer = (state = initialState, action) => {
             return {
                 ...state,
                 pages : pages,
-                total_users: state.total_users + 1
+                total_users: state.total_users + 1,
+                error: null
             }
         case USER_ADD_FAIL:
             return {
@@ -31,6 +36,23 @@ const UserReducer = (state = initialState, action) => {
             return {
                 ...state
             }
+        case USER_DEL_SUCCESS:
+            var index = 0
+            for(var i =0;i<state.users.length;i++)
+                {
+                    if (state.users[i].id==action.id_del)
+                        {
+                            index = i
+                            break
+                        }
+                }
+            state.users.splice(index,1)
+            const new_pages = gen_page(state.total_users - 1)
+            return {
+                ...state,
+                pages : new_pages,
+                total_users: state.total_users - 1
+            }
         case USER_MOD_SUCCESS:
             return {
                 ...state
@@ -38,6 +60,15 @@ const UserReducer = (state = initialState, action) => {
         case USER_MOD_FAIL:
             return {
                 ...state
+            }
+        case USER_DETAIL:
+            return {
+                ...state
+            }
+        case USER_DETAIL_SUCCESS:
+            return {
+                ...state,
+                user : action.user
             }
         default:
             return { ...state}

@@ -1,6 +1,6 @@
 import {
-    USER_ADD, USER_API, USER_DEL, USER_LIST, USER_MOD,
-    BASE_URL, USER_LIST_FAIL, USER_ADD_SUCCESS, USER_ADD_FAIL, USER_LIST_SUCCESS
+    USER_ADD, USER_API, USER_DEL, USER_LIST, USER_MOD, USER_DETAIL, USER_DETAIL_SUCCESS,
+    BASE_URL, USER_LIST_FAIL, USER_ADD_SUCCESS, USER_ADD_FAIL, USER_LIST_SUCCESS , USER_DEL_SUCCESS
 } from '../constants/user'
 import axios from 'axios'
 
@@ -14,7 +14,11 @@ const user_add = (username, email, name) => dispatch => {
                     dispatch(addUser(data))
                     break
                 default:
-                    break
+                    alert('Username hoặc email đã tồn tại!')
+                    dispatch({
+                        type: USER_ADD_FAIL,
+    
+                    })
             }
         })
         .catch(error => {
@@ -36,9 +40,53 @@ const user_list = (key=null, offset=0, limit=10) => dispatch => {
             }
         })
 }
-export {
-    user_add, user_list, test
+
+const user_del = e => dispatch => {
+    dispatch({type: USER_DEL})
+    const id_value = e.target.value
+    axios.post(BASE_URL+USER_API.USER_DEL, {id : e.target.value})
+    .then(({status, data: {data,error}}) => {
+        switch (Number(error.code)){
+            case 0:
+                dispatch(delUser(id_value))
+                break
+            default:
+                break
+        }
+    })
 }
+
+const user_detail = (key=null) => dispatch => {
+    dispatch({type: USER_DETAIL})
+    axios.post(BASE_URL+USER_API.USER_DETAIL, {id:key})
+    .then(({status, data: {data, error}}) => {
+        switch (Number(error.code)){
+            case 0 :
+                dispatch(User(data))
+                break
+            default:
+                break
+        }
+    })
+}
+export {
+    user_add, user_list, user_del, user_detail
+}
+
+export function User(data)
+    {   
+        return {
+            type: USER_DETAIL_SUCCESS,
+            user : data
+        }
+    }
+export function delUser(value)
+    {
+        return {
+            type: USER_DEL_SUCCESS,
+            id : value
+        }
+    }
 export function setUsers(data, total_users) {
     return {
         type: USER_LIST_SUCCESS,
