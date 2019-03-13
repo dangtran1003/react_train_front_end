@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
-import { user_detail } from '../actions/user';
+import { user_detail, change_detail } from '../actions/user';
 
 class UserDetail extends Component {
   static propTypes = {
@@ -14,44 +14,54 @@ class UserDetail extends Component {
       error : ''
   }
 
-  componentDidMount() {
+  componentWillMount() {
      this.props.dispatch(user_detail(this.props.match.params.id))
   }
+  handleFormChange = e =>{
+       const name = e.target.name
+       const value = e.target.value
+       this.setState({
+        [name] :value
+      }) 
+   }
+   handleSubmit = e =>
+        {
+            this.props.dispatch(change_detail(this.props.match.params.id, this.state.email, this.state.name))
+        }
 
   render() {
     return (
         <div className="card">
             <div className="card-header">
-                <strong>Horizontal</strong> Form
+                <strong>Cập nhật thông tin nhân viên <i>{this.props.user.username}</i></strong>
             </div>
             <div className="card-body">
-                <form className="form-horizontal" action="" method="post">
+                <form className="form-horizontal">
                     <div className="form-group row">
                         <label className="col-md-3 col-form-label" htmlFor="hf-email">Email</label>
                         <div className="col-md-9">
-                        <input className="form-control" id="hf-email" type="email" name="hf-email" value={this.props} autoComplete="email"/>
+                        <input className="form-control"  type="email" name="email" onChange={this.handleFormChange} autoComplete="email" placeholder={this.props.user.email}/>
                         <span className="help-block">Please enter your email</span>
                         </div>
                     </div>
                     <div className="form-group row">
                         <label className="col-md-3 col-form-label" htmlFor="hf-password">Name</label>
                         <div className="col-md-9">
-                            <input className="form-control" id="hf-password" type="text" name="hf-password" value={this.props} autoComplete="current-password"/>
+                            <input className="form-control" type="text" name="name" onChange={this.handleFormChange} placeholder={this.props.user.name}/>
                             <span className="help-block">Please enter your name</span>
                         </div>
                     </div>
                 </form>
             </div>
             <div className="card-footer">
-                <button className="btn btn-sm btn-primary" type="submit">
+                <button className="btn btn-sm btn-primary" onClick={this.handleSubmit}>
                     <i className="fa fa-dot-circle-o"></i> Submit</button>
-                <button className="btn btn-sm btn-danger" type="reset">
-                    <i className="fa fa-ban"></i> Reset</button>
             </div>
         </div>
     )
   }
 }
+
 const mapStateToProps = (state) => ({
     user: state.data.user
   })

@@ -5,9 +5,6 @@ import {configureStore} from './store'
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-// import store from './store'
-// import * as actions from './actions'
-const users = [{username:'xhuiklm10',email:'thdang1003@gmail.com',name:'Tran Hai Dang'}]
 
 const store = configureStore()
 ReactDOM.render(<Provider store={store}>

@@ -3,7 +3,6 @@ import { USER_ADD, USER_LIST, USER_ADD_FAIL, USER_ADD_SUCCESS, USER_DEL, USER_MO
 USER_LIST_SUCCESS,
 USER_DETAIL,
 USER_DETAIL_SUCCESS} from "../constants/user";
-import { stat } from "fs";
 
 const initialState = {
     notification : null,
@@ -11,7 +10,7 @@ const initialState = {
     users : [],
     pages : [],
     total_users: 0,
-    user : null
+    user : {}
 }
 const UserReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -20,13 +19,18 @@ const UserReducer = (state = initialState, action) => {
         case USER_LIST:
             return setUsers(state, action.payload)
         case USER_ADD_SUCCESS:
-            state.users.push(action.payload)
+            const users_new = [...state.users,action.payload]
             const pages = gen_page(state.total_users + 1)
             return {
                 ...state,
+                users: users_new,
                 pages : pages,
                 total_users: state.total_users + 1,
                 error: null
+            }
+        case USER_ADD:
+            return {
+                ...state
             }
         case USER_ADD_FAIL:
             return {
@@ -38,9 +42,9 @@ const UserReducer = (state = initialState, action) => {
             }
         case USER_DEL_SUCCESS:
             var index = 0
-            for(var i =0;i<state.users.length;i++)
+            for(var i = 0;i<state.users.length;i++)
                 {
-                    if (state.users[i].id==action.id_del)
+                    if (state.users[i].id === Number(action.id))
                         {
                             index = i
                             break
@@ -77,7 +81,6 @@ const UserReducer = (state = initialState, action) => {
 
 function gen_page(total){
     const num_page = Math.floor(total/10) + 1
-    console.log(num_page)
     const pages = []
     for (let index = 2; index < num_page+1; index++) {
         pages.push(index)

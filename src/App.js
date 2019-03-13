@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import DefaultComponent from './components/DefaultComponent'
+// import DefaultComponent from './components/DefaultComponent'
 import UserList from './components/UserList'
 import { Router, Switch, Route, Redirect } from 'react-router-dom'
 import history from './utils/history'
@@ -12,8 +12,9 @@ import UserDetail from './components/UserDetail';
             <Switch>
                 <Route path="/list/:page" component={UserList} />
                 <Route path="/modify/:id" component={UserDetail} />
-                <Route path="/" component={DefaultComponent} />
-                <Redirect to="/" />
+                <Redirect from='/list' to='/list/1'/>
+                <Redirect from='/' to='/list/1' />
+                {/* <Route path="/" component={DefaultComponent} /> */}
             </Switch>
     </Fragment>
 )

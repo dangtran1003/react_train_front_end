@@ -20,7 +20,7 @@ class User extends Component {
         <td>{email}</td>
         <td style={{width: 100}}>
           <a href={"/modify/"+id.toString()} className="btn btn-info" role="button" style={{margin:4}}><i className="icons font-l d-block mt-0 cui-wrench"></i></a>
-          <button className="btn btn-danger" role="button" value={id} onClick={this.props.user_del}><i className="icons font-l d-block mt-0 cui-trash"></i></button>
+          <button className="btn btn-danger" value={id} onClick={this.props.user_del}><i className="icons font-l d-block mt-0 cui-trash"></i></button>
         </td>
       </tr>
     )
