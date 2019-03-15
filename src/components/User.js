@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {user_del} from '../actions/user'
 import { connect } from 'react-redux';
 
-class User extends Component {
+export class User extends Component {
   static propTypes = {
     username : PropTypes.string,
     name : PropTypes.string,

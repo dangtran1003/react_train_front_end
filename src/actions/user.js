@@ -117,7 +117,6 @@ export function setUsers(data, total_users) {
 }
 
 export function addUser(data) {
-    console.log(data)
     return {
         type : USER_ADD_SUCCESS,
         payload : data

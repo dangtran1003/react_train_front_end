@@ -1,0 +1,163 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Components > UserList Render a snapshot for Link use enzyme 1`] = `
+<div
+  className="card"
+>
+  <div
+    className="card-header"
+  >
+    <i>
+       Danh sách người dùng
+    </i>
+  </div>
+  <div
+    className="card-body"
+  >
+    <input
+      className="form-control"
+      name="key_search"
+      onChange={[Function]}
+      placeholder="Key search"
+      type="text"
+    />
+    <br />
+    <table
+      className="table table-responsive-sm table-bordered table-striped table-sm"
+    >
+      <thead>
+        <tr>
+          <th>
+            Username
+          </th>
+          <th>
+            Name
+          </th>
+          <th>
+            Email
+          </th>
+          <th>
+            Date registered
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <Connect(User)
+          email="sasassss"
+          id={77}
+          key="0"
+          name="ddang"
+          username="asasassssss"
+        />
+        <Connect(User)
+          email="2222"
+          id={77}
+          key="1"
+          name="3333"
+          username="1111"
+        />
+        <tr>
+          <td>
+            <input
+              className="form-control"
+              name="username"
+              onChange={[Function]}
+              placeholder="Enter your username"
+              type="text"
+            />
+          </td>
+          <td>
+            <input
+              className="form-control"
+              name="name"
+              onChange={[Function]}
+              placeholder="Enter your name"
+              type="text"
+            />
+          </td>
+          <td>
+            <input
+              className="form-control"
+              name="email"
+              onChange={[Function]}
+              placeholder="Enter your email"
+              type="email"
+            />
+          </td>
+          <td>
+            <button
+              className="btn btn-success"
+              href="#"
+              onClick={[Function]}
+              style={
+                Object {
+                  "margin": 4,
+                }
+              }
+            >
+              <i
+                className="icons font-l d-block mt-0 cui-check"
+              />
+            </button>
+            <button
+              className="btn btn-danger"
+              href="#"
+            >
+              <i
+                className="icons font-l d-block mt-0 cui-trash"
+              />
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <nav>
+      <ul
+        className="pagination"
+      >
+        <li
+          className="page-item"
+        >
+          <a
+            className="page-link"
+            href="list/"
+          >
+            Prev
+          </a>
+        </li>
+        <li
+          className="page-time active"
+        >
+          <a
+            className="page-link"
+            href="list/1"
+          >
+            1
+          </a>
+        </li>
+        <li
+          className="page-time active"
+          key="0"
+        >
+          <a
+            className="page-link"
+            href="list/1"
+          >
+            1
+          </a>
+        </li>
+        <li
+          className="page-item"
+        >
+          <a
+            className="page-link"
+            href="list/2"
+          >
+            Next
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+`;

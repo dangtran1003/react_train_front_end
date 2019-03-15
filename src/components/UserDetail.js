@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { user_detail, change_detail } from '../actions/user';
 
-class UserDetail extends Component {
+export class UserDetail extends Component {
   static propTypes = {
     email : PropTypes.string,
     name : PropTypes.string,
@@ -15,7 +15,7 @@ class UserDetail extends Component {
   }
 
   componentWillMount() {
-     this.props.dispatch(user_detail(this.props.match.params.id))
+    //  this.props.dispatch(user_detail(this.props.match.params.id))
   }
   handleFormChange = e =>{
        const name = e.target.name
@@ -66,4 +66,4 @@ const mapStateToProps = (state) => ({
     user: state.data.user
   })
   
-  export default connect(mapStateToProps, null)(UserDetail)
+export default connect(mapStateToProps, null)(UserDetail)

@@ -6,8 +6,7 @@ import User from './User'
 import {user_list, user_add} from '../actions/user'
 import { connect } from 'react-redux';
 
-
-class UserList extends Component{
+export class UserList extends Component{
     state = {
       username : '',
       email : '',
@@ -49,7 +48,7 @@ class UserList extends Component{
     }
 
     componentDidMount() {
-        this.props.dispatch(user_list(null,this.props.match.params.page-1,10))
+        // this.props.dispatch(user_list(null,this.props.match.params.page-1,10))
     }
 
     // componentWillReceiveProps(nextProps) {

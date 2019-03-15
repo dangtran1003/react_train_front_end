@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Components > User Render a snapshot for Link use enzyme 1`] = `
+<tr>
+  <td>
+    trandang
+  </td>
+  <td>
+    teko vietnam
+  </td>
+  <td>
+    dang.th@teko.vn
+  </td>
+  <td
+    style={
+      Object {
+        "width": 100,
+      }
+    }
+  >
+    <a
+      className="btn btn-info"
+      href="/modify/1"
+      role="button"
+      style={
+        Object {
+          "margin": 4,
+        }
+      }
+    >
+      <i
+        className="icons font-l d-block mt-0 cui-wrench"
+      />
+    </a>
+    <button
+      className="btn btn-danger"
+      value={1}
+    >
+      <i
+        className="icons font-l d-block mt-0 cui-trash"
+      />
+    </button>
+  </td>
+</tr>
+`;
