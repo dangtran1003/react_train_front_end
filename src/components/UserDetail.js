@@ -15,7 +15,7 @@ export class UserDetail extends Component {
   }
 
   componentWillMount() {
-    //  this.props.dispatch(user_detail(this.props.match.params.id))
+     this.props.UserDetail(this.props.match.params.id)
   }
   handleFormChange = e =>{
        const name = e.target.name
@@ -26,7 +26,7 @@ export class UserDetail extends Component {
    }
    handleSubmit = e =>
         {
-            this.props.dispatch(change_detail(this.props.match.params.id, this.state.email, this.state.name))
+            this.props.ChangeDetail(this.props.match.params.id, this.state.email, this.state.name)
         }
 
   render() {
@@ -65,5 +65,16 @@ export class UserDetail extends Component {
 const mapStateToProps = (state) => ({
     user: state.data.user
   })
+
+function mapDispatchToProps(dispatch) {
+    return {
+        UserDetail : (id) => {
+            dispatch(user_detail(id))
+        },
+        ChangeDetail : (id, email, name) => {
+            dispatch(change_detail(id, email, name))
+        }
+    }
+}
   
-export default connect(mapStateToProps, null)(UserDetail)
+export default connect(mapStateToProps, mapDispatchToProps)(UserDetail)

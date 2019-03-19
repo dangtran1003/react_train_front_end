@@ -16,9 +16,9 @@ export class UserList extends Component{
     }
 
     handleSubmit = e => {
-      e.preventDefault()
+      // e.preventDefault()
       if (this.state.username.length !== 0 && this.state.email.length !== 0)
-        this.props.dispatch(user_add(this.state.username, this.state.email, this.state.name))
+        this.props.UserAdd(this.state.username, this.state.email, this.state.name)
       else 
         {
           this.setState({error:'Thiếu username hoặc password!'})
@@ -34,7 +34,7 @@ export class UserList extends Component{
       })
       if (name === 'key_search')
       {
-        this.props.dispatch(user_list(value,this.props.match.params.page-1,10))
+        this.props.UserList(value,this.props.match.params.page-1,10)
       }
     }
     static propTypes = {
@@ -48,13 +48,9 @@ export class UserList extends Component{
     }
 
     componentDidMount() {
-        // this.props.dispatch(user_list(null,this.props.match.params.page-1,10))
+        this.props.UserList(null, this.props.match.params.page - 1, 10)
     }
 
-    // componentWillReceiveProps(nextProps) {
-    //   console.log('DEBUG')
-    //   console.log(nextProps.users)
-    // }
 
     render(){
         return (
@@ -70,10 +66,10 @@ export class UserList extends Component{
             <table className="table table-responsive-sm table-bordered table-striped table-sm">
               <thead>
                 <tr>
-                  <th>Username</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Date registered</th>
+                  <th name='username'>Username</th>
+                  <th name='name'>Name</th>
+                  <th name='email'>Email</th>
+                  <th name='options'>Options</th>
                 </tr>
               </thead>
               <tbody>
@@ -128,4 +124,17 @@ const mapStateToProps = (state) => ({
   error: state.data.error
 })
 
-export default connect(mapStateToProps, null)(UserList)
+function mapDispatchToProps(dispatch) {
+  return {
+   UserList: (key_search,numPages,numUsers) => {
+    dispatch(user_list(key_search, numPages,numUsers))
+   },
+   
+   UserAdd : (username, email, name) => {
+     dispatch(user_add(username, email, name))
+   }
+  }
+ }
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserList)

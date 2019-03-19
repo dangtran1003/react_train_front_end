@@ -34,6 +34,19 @@ exports[`Components > User Render a snapshot for Link use enzyme 1`] = `
     </a>
     <button
       className="btn btn-danger"
+      onClick={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+          "results": Array [
+            Object {
+              "isThrow": false,
+              "value": undefined,
+            },
+          ],
+        }
+      }
       value={1}
     >
       <i

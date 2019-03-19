@@ -36,7 +36,26 @@ exports[`Components > User Render a snapshot for Link use enzyme 1`] = `
             autoComplete="email"
             className="form-control"
             name="email"
-            onChange={[Function]}
+            onChange={
+              [MockFunction] {
+                "calls": Array [
+                  Array [
+                    Object {
+                      "preventDefault": [Function],
+                      "target": Object {
+                        "value": "the-value",
+                      },
+                    },
+                  ],
+                ],
+                "results": Array [
+                  Object {
+                    "isThrow": false,
+                    "value": undefined,
+                  },
+                ],
+              }
+            }
             placeholder="dang.th@teko.vn"
             type="email"
           />
@@ -62,7 +81,26 @@ exports[`Components > User Render a snapshot for Link use enzyme 1`] = `
           <input
             className="form-control"
             name="name"
-            onChange={[Function]}
+            onChange={
+              [MockFunction] {
+                "calls": Array [
+                  Array [
+                    Object {
+                      "preventDefault": [Function],
+                      "target": Object {
+                        "value": "the-value",
+                      },
+                    },
+                  ],
+                ],
+                "results": Array [
+                  Object {
+                    "isThrow": false,
+                    "value": undefined,
+                  },
+                ],
+              }
+            }
             placeholder="teko vietnam"
             type="text"
           />

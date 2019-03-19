@@ -17,7 +17,50 @@ exports[`Components > UserList Render a snapshot for Link use enzyme 1`] = `
     <input
       className="form-control"
       name="key_search"
-      onChange={[Function]}
+      onChange={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              Object {
+                "preventDefault": [Function],
+                "target": Object {
+                  "value": "the-value",
+                },
+              },
+            ],
+            Array [
+              Object {
+                "preventDefault": [Function],
+                "target": Object {
+                  "value": "the-value",
+                },
+              },
+            ],
+            Array [
+              Object {
+                "preventDefault": [Function],
+                "target": Object {
+                  "value": "the-value",
+                },
+              },
+            ],
+          ],
+          "results": Array [
+            Object {
+              "isThrow": false,
+              "value": undefined,
+            },
+            Object {
+              "isThrow": false,
+              "value": undefined,
+            },
+            Object {
+              "isThrow": false,
+              "value": undefined,
+            },
+          ],
+        }
+      }
       placeholder="Key search"
       type="text"
     />
@@ -27,17 +70,25 @@ exports[`Components > UserList Render a snapshot for Link use enzyme 1`] = `
     >
       <thead>
         <tr>
-          <th>
+          <th
+            name="username"
+          >
             Username
           </th>
-          <th>
+          <th
+            name="name"
+          >
             Name
           </th>
-          <th>
+          <th
+            name="email"
+          >
             Email
           </th>
-          <th>
-            Date registered
+          <th
+            name="options"
+          >
+            Options
           </th>
         </tr>
       </thead>
@@ -61,7 +112,50 @@ exports[`Components > UserList Render a snapshot for Link use enzyme 1`] = `
             <input
               className="form-control"
               name="username"
-              onChange={[Function]}
+              onChange={
+                [MockFunction] {
+                  "calls": Array [
+                    Array [
+                      Object {
+                        "preventDefault": [Function],
+                        "target": Object {
+                          "value": "the-value",
+                        },
+                      },
+                    ],
+                    Array [
+                      Object {
+                        "preventDefault": [Function],
+                        "target": Object {
+                          "value": "the-value",
+                        },
+                      },
+                    ],
+                    Array [
+                      Object {
+                        "preventDefault": [Function],
+                        "target": Object {
+                          "value": "the-value",
+                        },
+                      },
+                    ],
+                  ],
+                  "results": Array [
+                    Object {
+                      "isThrow": false,
+                      "value": undefined,
+                    },
+                    Object {
+                      "isThrow": false,
+                      "value": undefined,
+                    },
+                    Object {
+                      "isThrow": false,
+                      "value": undefined,
+                    },
+                  ],
+                }
+              }
               placeholder="Enter your username"
               type="text"
             />
@@ -70,7 +164,50 @@ exports[`Components > UserList Render a snapshot for Link use enzyme 1`] = `
             <input
               className="form-control"
               name="name"
-              onChange={[Function]}
+              onChange={
+                [MockFunction] {
+                  "calls": Array [
+                    Array [
+                      Object {
+                        "preventDefault": [Function],
+                        "target": Object {
+                          "value": "the-value",
+                        },
+                      },
+                    ],
+                    Array [
+                      Object {
+                        "preventDefault": [Function],
+                        "target": Object {
+                          "value": "the-value",
+                        },
+                      },
+                    ],
+                    Array [
+                      Object {
+                        "preventDefault": [Function],
+                        "target": Object {
+                          "value": "the-value",
+                        },
+                      },
+                    ],
+                  ],
+                  "results": Array [
+                    Object {
+                      "isThrow": false,
+                      "value": undefined,
+                    },
+                    Object {
+                      "isThrow": false,
+                      "value": undefined,
+                    },
+                    Object {
+                      "isThrow": false,
+                      "value": undefined,
+                    },
+                  ],
+                }
+              }
               placeholder="Enter your name"
               type="text"
             />
@@ -79,7 +216,50 @@ exports[`Components > UserList Render a snapshot for Link use enzyme 1`] = `
             <input
               className="form-control"
               name="email"
-              onChange={[Function]}
+              onChange={
+                [MockFunction] {
+                  "calls": Array [
+                    Array [
+                      Object {
+                        "preventDefault": [Function],
+                        "target": Object {
+                          "value": "the-value",
+                        },
+                      },
+                    ],
+                    Array [
+                      Object {
+                        "preventDefault": [Function],
+                        "target": Object {
+                          "value": "the-value",
+                        },
+                      },
+                    ],
+                    Array [
+                      Object {
+                        "preventDefault": [Function],
+                        "target": Object {
+                          "value": "the-value",
+                        },
+                      },
+                    ],
+                  ],
+                  "results": Array [
+                    Object {
+                      "isThrow": false,
+                      "value": undefined,
+                    },
+                    Object {
+                      "isThrow": false,
+                      "value": undefined,
+                    },
+                    Object {
+                      "isThrow": false,
+                      "value": undefined,
+                    },
+                  ],
+                }
+              }
               placeholder="Enter your email"
               type="email"
             />
@@ -88,7 +268,19 @@ exports[`Components > UserList Render a snapshot for Link use enzyme 1`] = `
             <button
               className="btn btn-success"
               href="#"
-              onClick={[Function]}
+              onClick={
+                [MockFunction] {
+                  "calls": Array [
+                    Array [],
+                  ],
+                  "results": Array [
+                    Object {
+                      "isThrow": false,
+                      "value": undefined,
+                    },
+                  ],
+                }
+              }
               style={
                 Object {
                   "margin": 4,
